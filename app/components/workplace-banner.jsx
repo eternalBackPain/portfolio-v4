@@ -12,7 +12,7 @@ const WorkplaceBanner = ({ workplace, children }) => {
     );
   } else if (workplace == "Lendlease") {
     return (
-      <div className="rounded-md p-4 bg-lime-200">
+      <div className="rounded-md p-4 bg-lime-200 dark:text-black">
         <div className="text-2xl font-bold">{workplace}</div>
         <div>{children}</div>
       </div>
