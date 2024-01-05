@@ -2,7 +2,7 @@ import React from 'react'
 
 const BlogPage = () => {
   return (
-    <div>BlogPage TODO</div>
+    <div>COMING SOON</div>
   )
 }
 

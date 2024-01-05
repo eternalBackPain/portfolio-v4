@@ -5,7 +5,7 @@ import React from "react";
 const WorkplaceBanner = ({ workplace, children }) => {
   if (workplace == "Maddocks") {
     return (
-      <div className="rounded-md p-4 bg-neutral-600 text-slate-100">
+      <div className="rounded-md p-4 bg-neutral-600 text-white">
         <div className="text-2xl font-bold">{workplace}</div>
         <div>{children}</div>
       </div>
