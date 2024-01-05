@@ -1,7 +1,6 @@
 import "./globals.css";
 import { Navbar } from './components/nav';
 
-
 export const metadata = {
   title: "John Naoom",
   description: "Personal website for John Naoom",
