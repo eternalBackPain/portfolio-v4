@@ -2,10 +2,10 @@
 export function useMDXComponents(components) {
     return {
       // Apply Tailwind CSS styling to various MD tags
-      h1: ({ children }) => <h1 className="text-3xl font-bold mb-4 tracking-tighter">{children}</h1>,
-      h2: ({ children }) => <h2 className="text-2xl font-bold">{children}</h2>,
-      h3: ({ children }) => <h3 className="text-xl font-bold mb-2">{children}</h3>,
-      h4: ({ children }) => <h4 className="text-lg font-bold mb-1">{children}</h4>,
+      h1: ({ children }) => <h1 className="text-3xl font-medium mb-4 tracking-tighter">{children}</h1>,
+      h2: ({ children }) => <h2 className="text-2xl font-medium">{children}</h2>,
+      h3: ({ children }) => <h3 className="text-xl font-medium mb-2">{children}</h3>,
+      h4: ({ children }) => <h4 className="text-lg font-medium mb-1">{children}</h4>,
       h5: ({ children }) => <h5 className="text-base font-medium">{children}</h5>,
       h6: ({ children }) => <h6 className="text-sm font-medium">{children}</h6>,
       p: ({ children }) => <p className="mb-2">{children}</p>,

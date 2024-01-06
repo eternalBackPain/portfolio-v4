@@ -1,45 +1,50 @@
-// // File: app/gallery/page.jsx
+import React from "react";
+import fs from "fs";
+import path from "path";
+import Image from "next/image";
 
-// import React from "react";
-// import fs from "fs";
-// import path from "path";
-// // import Gallery from "./components/Gallery";
+export async function loader() {
+  const photosDirectory = path.join(process.cwd(), "public/images/gallery");
+  const filenames = fs.readdirSync(photosDirectory);
 
-// // This function runs on the server side to fetch data
-// export async function loader() {
-//   const photosDirectory = path.join(process.cwd(), "public/images/home");
-//   const filenames = fs.readdirSync(photosDirectory);
+  const photos = filenames.map((filename) => ({
+    src: `/images/gallery/${filename}`, // Path relative to the public directory
+    alt: `Photo - ${filename}`,
+  }));
 
-//   const photos = filenames.map((filename) => ({
-//     src: `../public/images/home/${filename}`, // Path relative to the public directory
-//     alt: `Photo - ${filename}`,
-//   }));
-
-//   return { photos };
-// }
-
-// // Your page component, which receives the data from the loader
-// const GalleryPage = ({ photos }) => {
-//   return (
-//     <div className="columns-2 sm:columns-3 gap-4 my-8">
-//       {photos.map((photo, index) => (
-//         <div key={index} className={`...`}>
-//           <Image src={photo.src} alt={photo.alt} layout="fill" />
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default GalleryPage;
-
-
-import React from 'react'
-
-const Gallery = () => {
-  return (
-    <div>Gallery</div>
-  )
+  return photos;
 }
 
-export default Gallery
+const GalleryPage = async () => {
+  const photos = await loader();
+  //   console.log(photos);
+  
+  let animationStyle = "animate-pulse";
+  function handleImageLoad() {
+    animationStyle = "animate-none";
+  }
+
+  return (
+    <div>
+      <h2 className="text-2xl font-medium mb-8 tracking-tighter">Life vibe</h2>
+      <div className="flex justify-normal align-middle flex-wrap gap-y-4 gap-x-4">
+        {photos.map((photo, index) => (
+          <div
+            key={index}
+            className={`relative h-52 w-52 rounded-md bg-gray-200`}
+          >
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-md"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default GalleryPage;

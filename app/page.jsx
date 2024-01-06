@@ -1,8 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import Gallery from "./components/gallery";
-import fs from "fs";
-import path from "path";
+import headshot from "../public/images/Headshot 1557 × 2054.jpg";
+import Link from "next/link";
 // import jj from "../public/images/home/JJ-3024 × 4032.png";
 
 const HomePage = ({ photos }) => {
@@ -12,36 +11,52 @@ const HomePage = ({ photos }) => {
         <h1 className="text-3xl font-medium mb-10 tracking-tighter">
           John Naoom
         </h1>
-        <div>
-          <p className="mb-2">
-            ⚖️ Australian practicing lawyer (expected date of admission:
-            September 2024).
-          </p>
-          <p className="mb-2"> 📈 Economics graduate.</p>
-          <p className="mb-2">💻 Programming hobbyist.</p>
-          <br></br>
-          <p className="mb-4">
-            Minim tempor veniam quis excepteur non laboris commodo duis Lorem
-            excepteur cillum. Adipisicing pariatur duis nostrud esse est est
-            esse est id nisi ea. Sunt incididunt cillum ex incididunt elit
-            fugiat occaecat ad. Esse amet cillum magna cupidatat id.
-            Exercitation irure minim magna fugiat duis non. Culpa eiusmod anim
-            Lorem non esse adipisicing cillum magna aliquip veniam.
-          </p>
-          <p></p>
+        <div id="intro">
+          <div id="name and description" className="mb-14">
+            <p className="mb-2">
+              ⚖️ Australian practicing lawyer (expected date of admission:
+              September 2024).
+            </p>
+            <p className="mb-2"> 📈 Economics graduate.</p>
+            <p className="mb-2">💻 Programming hobbyist.</p>
+          </div>
+          <div id="quote" className="mb-10 p-4 border-l-4 border-gray-300">
+            <p className="mb-2 font-medium">
+              "In this world, nothing can be said to be certain, except death
+              <u>,</u> <s>and</s> taxes<u>, and back pain</u>."
+            </p>
+            <p className="italic text-sm pl-6">
+              – Benjamin Franklin, in a letter to Jean-Baptiste Le Roy, 1789,
+              amended by myself
+            </p>
+          </div>
         </div>
       </section>
-      <h2 className="text-xl font-medium tracking-tighter">Life vibe:</h2>
 
       <section>
-        {/* <Gallery photos={photos}/> */}
-        <div className="columns-2 sm:columns-3 gap-4 my-8">
-          <div className="bg-slate-200 rounded-md relative h-40 mb-4"></div>
-          <div className="bg-slate-300 rounded-md relative h-80 mb-4 sm:mb-0"></div>
-          <div className="bg-slate-400 rounded-md relative h-40 sm:h-80 sm:mb-4"></div>
-          <div className="bg-slate-500 rounded-md relative h-40 mb-4 sm:mb-0"></div>
-          <div className="bg-slate-600 rounded-md relative h-40 mb-4"></div>
-          <div className="bg-slate-700 rounded-md relative h-80"></div>
+        <h2 className="text-2xl font-medium tracking-tighter mb-10">
+          An introduction
+        </h2>
+        <div className="flex justify-between gap-4">
+          <Image
+            alt="my headshot"
+            src={headshot}
+            sizes="(min-width: 768px) 213px, 33vw"
+            priority
+            className="rounded-lg object-cover w-2/5"
+          />
+          <div className="flex flex-col justify-top gap-6">
+            <p>Hello learned friend.</p>
+
+            <p>
+              I've made this website as a space to publish things about my life. I am to update it as life progresses.
+            </p>
+
+            <p>
+              Have a browse around, and shoot me a message if anything here
+              interests you (my contact deets are on the <Link href="/resume" className="text-blue-500">resume</Link> page).
+            </p>
+          </div>
         </div>
       </section>
     </>
