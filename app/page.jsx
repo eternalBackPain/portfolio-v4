@@ -49,7 +49,7 @@ const HomePage = ({ photos }) => {
             <p>Hello learned friend.</p>
 
             <p>
-              I've made this website as a space to publish things about my life. I am to update it as life progresses.
+              I've made this website as a space to publish things about my life. I aim to update it as life progresses.
             </p>
 
             <p>
