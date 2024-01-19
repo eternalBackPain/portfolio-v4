@@ -46,7 +46,7 @@ const HomePage = ({ photos }) => {
             className="rounded-lg object-cover w-2/5"
           />
           <div className="flex flex-col justify-top gap-6">
-            <p>Hello learned friend.</p>
+            <p>Hello 👋.</p>
 
             <p>
               I've made this website as a space to publish things about my life. I aim to update it as life progresses.
@@ -54,7 +54,7 @@ const HomePage = ({ photos }) => {
 
             <p>
               Have a browse around, and shoot me a message if anything here
-              interests you (my contact deets are on the <Link href="/resume" className="text-blue-500">resume</Link> page).
+              interests you (my contact details are on the <Link href="/resume" className="text-blue-500">resume</Link> page).
             </p>
           </div>
         </div>
