@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import headshot from "../public/images/Headshot 1557 × 2054.jpg";
+import headshot from "../public/images/John Naoom SQUARE 2024.jpg";
 import Link from "next/link";
 // import jj from "../public/images/home/JJ-3024 × 4032.png";
 
