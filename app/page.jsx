@@ -14,8 +14,7 @@ const HomePage = ({ photos }) => {
         <div id="intro">
           <div id="name and description" className="mb-14">
             <p className="mb-2">
-              ⚖️ Australian practicing lawyer (expected date of admission:
-              September 2024).
+              ⚖️ Australian practicing solicitor.
             </p>
             <p className="mb-2"> 📈 Economics graduate.</p>
             <p className="mb-2">💻 Programming hobbyist.</p>
@@ -46,15 +45,15 @@ const HomePage = ({ photos }) => {
             className="rounded-lg object-cover w-2/5"
           />
           <div className="flex flex-col justify-top gap-6">
-            <p>Hello 👋.</p>
+            <p>Hello homies.</p>
 
             <p>
-              I've made this website as a space to publish things about my life. I aim to update it as life progresses.
+              I've made this website as a space to publish things about my life. I aim to update it whenever I can.
             </p>
 
             <p>
-              Have a browse around, and shoot me a message if anything here
-              interests you (my contact details are on the <Link href="/resume" className="text-blue-500">resume</Link> page).
+              Have a browse around and send me a message if anything here
+              interests you (contact details are on the <Link href="/resume" className="text-blue-500">resume</Link> page).
             </p>
           </div>
         </div>

@@ -52,7 +52,7 @@ const ProjectsPage = async () => {
       </h1>
       <p className="mb-8">
         These are coding projects I've worked on in my spare time. They span web
-        development, data analysis and creative programming. I try to develop
+        development, data analysis and random stuff I'm working on. I try to develop
         apps that play within law and economics.
       </p>
       <ul>

@@ -6,7 +6,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 export const metadata = {
   title: "John Naoom",
   description: "Personal website for John Naoom",
-  keywords: "John Naoom, johnnaoom, personal website"
+  keywords: "John Naoom, johnnaoom, personal website, naoom"
 };
 
 export default function RootLayout({ children }) {
