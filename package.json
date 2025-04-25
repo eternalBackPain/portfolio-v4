@@ -14,9 +14,16 @@
     "@next/mdx": "^14.0.4",
     "@vercel/analytics": "^1.1.1",
     "@vercel/speed-insights": "^1.0.2",
+    "fs": "^0.0.1-security",
+    "install": "^0.13.0",
     "next": "14.0.4",
+    "next-mdx-remote": "^5.0.0",
+    "npm": "^11.3.0",
+    "path": "^0.12.7",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-ipynb-renderer": "^2.2.4",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",

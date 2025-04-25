@@ -1,0 +1,67 @@
+# Introducing a contract editor for lawyers
+
+>"There is a crucial similarity between lawyers and programmers: the way they use words. Computer science and law are both linguistic professions. Programmers and lawyers use language to create, manipulate, and interpret complex abstractions. A programmer who uses the right words in the right way makes a computer do something. A lawyer who uses the right words in the right way changes people’s rights and obligations. There is a nearly exact analogy between the text of a program and the text of a law." - Grimmelmann (2022)
+
+## The idea
+
+A code editor for lawyers drafting contracts. This editor will have the lawyer draft contracts in the same manner a software developer would code. The code will contain the drafting of a contract along with all the code necessary to format the contract. The human-readable contract will appear adjacent to your code and will live-update with every amendment to your drafting.
+
+## Purposes
+
+The legal industry relies on Microsoft Word to draft contracts – this is unlikely to change in the short term. 
+
+However, Microsoft Word fails in 2 primary respects:
+1. It is proprietary.
+2. It is not purpose-built for contract drafting.
+
+This project seeks to address both these failings.
+
+### To make drafting programmatic and transparent
+
+Microsoft Word does not show you why your images, if moved a millimetre to the left, will send your layout into oblivion. We rely on legal secretaries and word processors with years of experience to fiddle with formatting, numbering and fields.
+
+I do not discount its capabilities. Microsoft Word is feature-rich and extensible, allowing firms to tailor their experience of the application. However, I believe there is a tradeoff between capabilities and usability.
+
+This project does not seek to replace the industry standard. I only want to demonstrate to lawyers how other STEM professionals may approach the challenge that is legal drafting.
+
+Programmatic legal drafting has been adopted in a variety of other legal fields:
+* **[Rules as Code](https://www.govcms.gov.au/rac)** are developed by legislatures to turn laws into machine readable code. Below are some examples captured from Grimmelmann (2022):
+	* French Tax Code: M++ is a new programming language for French tax law, showing how formalizing legal rules improves reliability and auditability.
+    - Property Law (Future Interests): Orlando models property conveyances programmatically, making complex property rights easier to understand and teach.
+* **Smart Legal Contracts** have been written in programmatic languages such as [Solidity](https://soliditylang.org/) to write legal contracts that are self-executable (i.e. upon a trigger, do something on some computer network). There are open-source projects out there developing tools to assist in drafting smart legal contracts (e.g. [Accord Project](https://accordproject.org/)). However, I do not foresee many lawyers venturing into this realm of drafting anytime soon. The [Data and Logic](https://accordproject.org/intro-video/) of a smart legal contract is not strictly necessary for a streamlined contract drafting experience.
+* For **contracts**, researchers have primarily focused on how to best model a contract, rather than simply improving the quality of life of a lawyer. Below are some research directions identified in Grimmelmann (2022):
+	* **Legal Domain-Specific Languages (DSLs)**: Many legal areas could benefit from dedicated DSLs to capture unique legal structures, such as tax law, contracts, and property law.
+    - **Hybrid Contracts**: Combining human-readable legal language with machine-readable code could improve contract reliability and reduce inconsistencies.
+    - **Orthogonal Legal Primitives**: Identify basic legal concepts (like property interests or obligations) as fundamental components in legal programming, creating a "legal calculus."
+    - **Legal Drafting Languages**: Use PL concepts like cross-referencing, variables, and scope to improve clarity and consistency in legal drafting.
+    - **Legal Design Patterns**: Develop templates for recurring legal structures, much like design patterns in software engineering.
+    - **Design Principles**: Apply broad PL principles, like modularity and type safety, to create reliable, maintainable legal documents.
+    - **IDE for Lawyers**: Lawyers could benefit from IDEs with syntax highlighting, auto-completion, and error detection, similar to those used in software development.
+
+### To improve the drafting experience
+
+Contracts are a unique creature. Their composition and content are integral to construction. Defined terms, cross-references and clause numbering were designed by lawyers to bring certainty to the terms of a contract. Paradoxically, they bring pain to the lawyers using them.
+
+There are proprietary options for purpose-built contract drafting software (e.g. [AllDrafts.com](https://alldrafts.com/try)). However, again, nothing exists that shows the actual source code of what you're drafting. 
+
+I propose to develop the following to improve a lawyer's drafting experience:
+
+#### A markup syntax 
+This will allow control over formatting, styling, defining terms, cross referencing, attaching schedules, and all other elements of contractual drafting which currently frustrate lawyers. 
+
+It will adpot a 'declarative' approach to drafting over Microsoft Word's WYSIWYG (what you see is what you get). 
+
+It will also come with standard formatting pre-sets which is common across most Australian contracts but configurable if desired.
+
+#### Modular composition 
+If you have ever developed a software application, or written a thesis in LaTex, you will appreciate the benefits of modular components. 
+
+Instead of drafting in one Microsoft Word document with many windows of the same contract open on your monitors, the contract will be drafted in a folder containing elements of the contract in separate files. 
+
+This will assist in compiling schedules, images and other content which may be annoying to work with in one massive Microsoft Word document. 
+
+
+#### A web-based editing UI
+This will incorporate certain Quality of Life (**QOL**) tools which you would commonly find in a software developer's toolbox, such as intellisense and advanced find and replace through regex. 
+
+I have not put too much thought into this as it will likely be the last step to fully develop, but see [What Would an Integrated Development Environment for Law look like?](https://law.mit.edu/pub/whatwouldanintegrateddevelopmentenvironmentforlawlooklike/release/2) by Micharl Jeffery for inspiration.
