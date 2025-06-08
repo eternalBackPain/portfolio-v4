@@ -19,10 +19,7 @@ const GalleryPage = async () => {
   const photos = await loader();
   //   console.log(photos);
   
-  let animationStyle = "animate-pulse";
-  function handleImageLoad() {
-    animationStyle = "animate-none";
-  }
+  // remove unused animation style logic
 
   return (
     <div>
@@ -36,9 +33,8 @@ const GalleryPage = async () => {
             <Image
               src={photo.src}
               alt={photo.alt}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-md"
+              fill
+              className="rounded-md object-cover"
             />
           </div>
         ))}
