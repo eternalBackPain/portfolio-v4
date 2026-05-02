@@ -1,0 +1,116 @@
+# Why AI causes more mistakes
+
+I read an interesting paper on AI which I thought I would share and summarise here. It's titled ['Delegation and Verification Under AI'](https://arxiv.org/abs/2603.02961) authored by Lingxiao Huang (Nanjing University), Wenyang Xiao (Nanjing University) and Nisheeth K. Vishnoi (Yale University).
+
+I think anyone thinking about rolling out AI in high-risk professional settings (e.g. doctors, lawyers, etc) should understand the gist of this paper. It's novelty is in that it uses mathematical models to prove that AI shapes worker output in interesting ways.
+
+For a quick overview, here's the abstract:
+
+> > As AI systems enter institutional workflows, workers must decide whether to delegate task execution to AI and how much effort to invest in verifying AI outputs, while institutions evaluate workers using outcome-based standards that may misalign with workers’ private costs. We model delegation and verification as the solution to a rational worker’s optimization problem, and define worker quality by evaluating an institution-centered utility (distinct from the worker’s objective) at the resulting optimal action. We formally characterize optimal worker workflows and show that AI induces phase transitions, where arbitrarily small differences in verification ability lead to sharply different behaviors. As a result, AI can amplify workers with strong verification reliability while degrading institutional worker quality for others who rationally over-delegate and reduce oversight, even when baseline task success improves and no behavioral biases are present. These results identify a structural mechanism by which AI reshapes institutional worker quality and amplifies quality disparities between workers with different verification reliability.
+
+## Introduction
+
+When an AI tool is introduced into a workflow, an employee will usually have three broad options:
+
+1. perform the task manually, without using the AI tool;
+2. delegate the task to the AI tool and accept the output without meaningful review; or
+3. delegate the task to the AI tool and then verify, correct or supplement the output.
+
+The third option is often the outcome that businesses intend. The employee obtains the productivity benefit of the AI system, while still applying human judgment to ensure that the output is accurate, appropriate and safe to use.
+
+However, verification is not costless. It requires time, context, attention and expertise. In many workplaces, the worker bears much of that immediate cost, while the institution receives much of the benefit of avoided error. That mismatch may cause employees to make perfectly rational decisions that nevertheless reduce the quality of the institution's output.
+
+For example, an employee may ask an AI system to prepare a routine project update. The update appears polished and plausible, so the employee gives it only a cursory review before sending it. If the AI has invented a deadline or misstated a project status, the employee has saved time, but the organisation may suffer confusion, loss of trust and downstream operational cost.
+
+The employee's decision may not be malicious or irrational. It may simply reflect the private benefit of saving time compared with the personal cost of checking the work carefully.
+
+## The model
+
+The authors model AI-assisted work as a delegation and verification problem. In broad terms, the model distinguishes between:
+
+* manual work, where the worker performs the task from scratch;
+* pure delegation, where the worker relies on the AI output without verification; and
+* verified delegation, where the worker delegates the task to AI but invests effort in checking the result.
+
+The key feature of the model is that the worker and the institution are not assumed to value those options in the same way.
+
+The worker is concerned with their own private utility. That includes the benefit of completing the task, but also the cost of their own time and cognitive effort. The institution is concerned with the quality of the final outcome and the cost of failure. Those costs are often much greater for the institution than for the individual employee.
+
+This distinction matters. A small error in an AI-generated email, legal summary, customer communication, medical note, coding task or financial analysis may impose limited personal cost on the worker. However, the same error may expose the business to legal, operational, regulatory or reputational consequences.
+
+In short, the institution may want careful verification in circumstances where the worker's private incentives favour speed.
+
+## Verification is a separate skill
+
+The paper distinguishes between two forms of worker capability:
+
+* execution efficiency, being the worker's ability to perform the task manually; and
+* verification reliability, being the worker's ability to identify and correct errors in AI output.
+
+This distinction is important for businesses adopting AI.
+
+Before the introduction of AI, many organisations primarily assessed employees by reference to execution. The relevant question was whether the employee could complete the task accurately and efficiently themselves.
+
+Once AI is introduced, that may no longer be the most important question. If the AI system can generate a first draft, classification, recommendation or analysis, the critical human contribution may become the ability to review the machine's output.
+
+That means a strong manual performer will not necessarily be a strong AI supervisor. An employee may be highly capable when performing work from scratch, but poor at detecting subtle hallucinations, unjustified assumptions or context-specific errors in AI-generated work. Conversely, an employee who is slower at manual execution may be more valuable in an AI-assisted workflow if they are better at verification.
+
+Businesses should therefore be cautious about assuming that AI simply amplifies existing employee capability. In some cases, it may instead reveal that the most valuable capability has changed.
+
+## The verification cliff
+
+One of the paper's more important insights is that employee behaviour may not change gradually as AI improves.
+
+It is tempting to assume that if an AI tool becomes slightly better, employees will trust it slightly more and check it slightly less. The paper suggests that, in some cases, the change may be abrupt.
+
+The reason is that verification often has an upfront cognitive cost. To properly check an AI-generated report, analysis or recommendation, the employee must first understand the context, identify the relevant assumptions, read the output closely and decide what needs to be tested. The worker cannot always apply a neat, incremental amount of verification effort.
+
+As a result, once the AI appears sufficiently reliable, the employee may move suddenly from verified delegation to pure delegation. They may not reduce review by 10 or 20 per cent. They may stop reviewing in any meaningful way.
+
+This is the "cliff" risk. A tool that is good enough to inspire trust may not be good enough to justify that trust.
+
+## Why better AI may create greater risk
+
+The most counterintuitive implication is that improving the AI tool may, in some circumstances, increase the risk of undetected errors.
+
+If an AI system is obviously unreliable, employees know that it must be checked. Its errors are visible and verification feels worthwhile. However, once the system becomes more capable, employees may start to assume that checking is unnecessary.
+
+In that scenario, the AI may make fewer errors overall, but the remaining errors may be less likely to be caught. The institution may therefore be worse off if a meaningful number of employees shift from verified delegation to pure delegation.
+
+The risk is greater where employees overestimate the AI's reliability. Vendor claims, internal enthusiasm, impressive demonstrations or a run of successful uses may lead employees to believe the tool is more accurate than it is in the relevant business context. That miscalibration may cause employees to reduce oversight prematurely.
+
+This has obvious implications for businesses. AI governance cannot focus only on the technical capability of the tool. It must also consider how the tool changes employee behaviour.
+
+## In the legal context
+
+The same framework has obvious application to legal work.
+
+Law firms already operate through a delegation pipeline. A junior lawyer prepares a first draft, researches a point, reviews documents or prepares a chronology. A senior lawyer or partner then reviews, corrects and approves the work before it is sent to the client, filed in court or used in a transaction. In that traditional model, the junior lawyer is the first-instance producer and the partner is the verifier.
+
+AI complicates that structure because it introduces another layer of delegation. The junior lawyer may now delegate parts of their own work to an AI system before the partner ever sees it. The partner is still expected to supervise the final product, but the junior lawyer may have done less of the underlying reasoning themselves.
+
+That creates a particular risk for junior lawyers. A junior lawyer is often still developing the very skill that AI-assisted work requires most: the ability to know whether an answer is right. They may be able to recognise that an AI-generated draft is fluent, plausible and well-structured, but may be less able to identify that it has missed a statutory exception, overstated a principle, relied on a distinguishable authority or invented a procedural step.
+
+Junior lawyers are not careless - their verification reliability may be lower because they have less experience. In the terminology of the paper, a junior lawyer may have lower "alpha" in a particular area of law. If that lawyer uses AI to produce work that looks polished, they may be more likely to trust the output than they would trust their own rough first draft.
+
+There is also a second trust problem. Junior lawyers are trained to trust the judgment of partners. That is usually appropriate. However, if a junior lawyer assumes that the partner will catch any error, the junior may rationally spend less time verifying the AI-assisted work before sending it up the chain. The result is a form of double delegation: the junior delegates to AI, and then relies on the partner as the final safety net.
+
+That may increase error risk in practice. Partners are often reviewing under time pressure. They may assume that the junior has checked the authorities, citations, factual references and procedural points. If the AI output is polished, the partner may focus on strategy, tone and commercial judgment rather than re-performing the underlying research. The partner's review may therefore be less complete than the junior assumes.
+
+The billable hour model may reinforce this problem in several ways.
+
+First, it can make verification time difficult to explain. If AI has produced a draft quickly, a junior lawyer may feel pressure not to record substantial time checking it. The visible work product may have appeared quickly, while the most important work - verifying the reasoning - is slow, invisible and hard to describe.
+
+Secondly, firms and clients may expect AI to reduce cost. That expectation may create pressure to shorten the very review steps that make AI-assisted work reliable. If the business case for AI is framed solely as "the same work in less time", junior lawyers may infer that spending time checking the output is inefficient, even where it is professionally necessary.
+
+Thirdly, the billable hour can distort training incentives. Junior lawyers traditionally learn by doing: reading the cases, struggling with the authorities, drafting imperfectly and receiving feedback. If AI performs too much of that first-instance work, the junior lawyer may get fewer opportunities to build the judgment needed to verify AI output later. In the short term, the work may be faster. In the long term, the profession may produce lawyers who have less experience with the underlying reasoning.
+
+This does not mean that junior lawyers are necessarily more likely to make mistakes whenever they use AI. A supervised junior lawyer using AI carefully may produce better work than an unsupervised lawyer working manually. Nor is the problem limited to juniors. Senior lawyers can also over-trust fluent AI output, particularly outside their area of expertise or under time pressure.
+
+However, junior lawyers may be more exposed to the risk identified in the paper because three factors often coincide:
+
+1. they have less developed verification judgment;
+2. they may assume that partner review will catch errors; and
+3. they may be working within time-recording and cost-pressure structures that make careful verification feel inefficient.
+
+For law firms, the lesson is that AI supervision should not be treated as identical to ordinary partner review of junior work. A partner reviewing AI-assisted work may need to know whether AI was used, what it was used for, and what verification steps the junior lawyer performed.
