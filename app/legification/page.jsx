@@ -3,7 +3,7 @@ import { LegislationSearch } from "./legislation-search";
 export const metadata = {
   title: "Legification | John Naoom",
   description:
-    "Search Commonwealth Acts and legislative instruments from legislation.gov.au.",
+    "Search Commonwealth and NSW Acts and legislative instruments.",
 };
 
 export default function LegificationPage() {
@@ -21,7 +21,8 @@ export default function LegificationPage() {
         </p>
         <p>
           Currently, Legification supports principal and in-force Commonwealth
-          Acts and legislative instruments.  Legislation from states and territories will be implemented soon. For any support issues, please contact myself at johnnaoom@gmail.com.
+          and NSW Acts and legislative instruments. For any support issues,
+          please contact myself at johnnaoom@gmail.com.
         </p>
       </div>
     </div>

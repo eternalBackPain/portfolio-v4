@@ -9,6 +9,10 @@ const LEGISLATION_TYPES = [
   { value: "Act", label: "Act" },
   { value: "Legislative-instrument", label: "Legislative instrument" },
 ];
+const JURISDICTIONS = [
+  { value: "commonwealth", label: "Commonwealth" },
+  { value: "new south wales", label: "NSW" },
+];
 
 function isSearchableRecord(item) {
   return (
@@ -48,6 +52,13 @@ function formatType(type) {
     : type;
 }
 
+function formatJurisdiction(jurisdiction) {
+  return (
+    JURISDICTIONS.find((item) => item.value === jurisdiction)?.label ??
+    jurisdiction
+  );
+}
+
 function getPaginationItems(page, totalPages) {
   if (totalPages <= 7) {
     return Array.from({ length: totalPages }, (_, index) => index + 1);
@@ -80,7 +91,11 @@ export function LegislationSearch() {
   const [selectedTypes, setSelectedTypes] = useState(
     () => new Set(LEGISLATION_TYPES.map((type) => type.value))
   );
+  const [selectedJurisdictions, setSelectedJurisdictions] = useState(
+    () => new Set(JURISDICTIONS.map((jurisdiction) => jurisdiction.value))
+  );
   const [currentPage, setCurrentPage] = useState(1);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
   useEffect(() => {
     let isActive = true;
@@ -134,6 +149,7 @@ export function LegislationSearch() {
     const timeoutId = window.setTimeout(() => {
       setDebouncedQuery(query.trim().toLowerCase());
       setCurrentPage(1);
+      setHighlightedIndex(-1);
     }, SEARCH_DEBOUNCE_MS);
 
     return () => {
@@ -149,7 +165,7 @@ export function LegislationSearch() {
     return legislation
       .filter(
         (item) =>
-          item.jurisdiction === "commonwealth" &&
+          selectedJurisdictions.has(item.jurisdiction) &&
           selectedTypes.has(item.type) &&
           item.searchTitle.includes(debouncedQuery)
       )
@@ -164,7 +180,13 @@ export function LegislationSearch() {
 
         return left.title.localeCompare(right.title);
       });
-  }, [debouncedQuery, legislation, loadState, selectedTypes]);
+  }, [
+    debouncedQuery,
+    legislation,
+    loadState,
+    selectedJurisdictions,
+    selectedTypes,
+  ]);
 
   const totalPages = Math.ceil(results.length / RESULTS_PER_PAGE);
   const pageItems = results.slice(
@@ -172,6 +194,47 @@ export function LegislationSearch() {
     currentPage * RESULTS_PER_PAGE
   );
   const paginationItems = getPaginationItems(currentPage, totalPages);
+
+  useEffect(() => {
+    setHighlightedIndex((currentIndex) => {
+      if (pageItems.length === 0) {
+        return -1;
+      }
+
+      return Math.min(currentIndex, pageItems.length - 1);
+    });
+  }, [pageItems.length]);
+
+  function handleSearchKeyDown(event) {
+    if (pageItems.length === 0) {
+      return;
+    }
+
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setHighlightedIndex((currentIndex) =>
+        currentIndex < 0 ? 0 : Math.min(currentIndex + 1, pageItems.length - 1)
+      );
+      return;
+    }
+
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      setHighlightedIndex((currentIndex) =>
+        currentIndex < 0 ? pageItems.length - 1 : Math.max(currentIndex - 1, 0)
+      );
+      return;
+    }
+
+    if (event.key === "Enter" && highlightedIndex >= 0) {
+      event.preventDefault();
+      window.open(
+        pageItems[highlightedIndex].url,
+        "_blank",
+        "noopener,noreferrer"
+      );
+    }
+  }
 
   function toggleType(type) {
     setSelectedTypes((currentTypes) => {
@@ -186,6 +249,23 @@ export function LegislationSearch() {
       return nextTypes;
     });
     setCurrentPage(1);
+    setHighlightedIndex(-1);
+  }
+
+  function toggleJurisdiction(jurisdiction) {
+    setSelectedJurisdictions((currentJurisdictions) => {
+      const nextJurisdictions = new Set(currentJurisdictions);
+
+      if (nextJurisdictions.has(jurisdiction)) {
+        nextJurisdictions.delete(jurisdiction);
+      } else {
+        nextJurisdictions.add(jurisdiction);
+      }
+
+      return nextJurisdictions;
+    });
+    setCurrentPage(1);
+    setHighlightedIndex(-1);
   }
 
   let status = "";
@@ -213,12 +293,38 @@ export function LegislationSearch() {
           autoFocus
           className="w-full rounded-md border border-neutral-300 bg-white px-4 py-3 text-base text-black outline-none transition focus:border-neutral-800 focus:ring-2 focus:ring-neutral-800 dark:border-neutral-700 dark:bg-[#111010] dark:text-white dark:focus:border-neutral-200 dark:focus:ring-neutral-200"
           name="q"
-          onChange={(event) => setQuery(event.target.value)}
+          onChange={(event) => {
+            setQuery(event.target.value);
+            setHighlightedIndex(-1);
+          }}
+          onKeyDown={handleSearchKeyDown}
           placeholder="Start typing the name of an Act or Regulation"
           spellCheck="false"
           type="search"
           value={query}
         />
+
+        <fieldset
+          aria-label="Jurisdiction filters"
+          className="flex flex-wrap gap-x-4 gap-y-2 border-0 p-0 text-base"
+        >
+          {JURISDICTIONS.map((jurisdiction) => (
+            <label
+              className="inline-flex items-center gap-2"
+              key={jurisdiction.value}
+            >
+              <input
+                checked={selectedJurisdictions.has(jurisdiction.value)}
+                className="h-4 w-4 accent-sky-700"
+                name="jurisdiction"
+                onChange={() => toggleJurisdiction(jurisdiction.value)}
+                type="checkbox"
+                value={jurisdiction.value}
+              />
+              {jurisdiction.label}
+            </label>
+          ))}
+        </fieldset>
 
         <fieldset
           aria-label="Legislation type filters"
@@ -252,19 +358,27 @@ export function LegislationSearch() {
           aria-label="Search results"
           className="mt-2 overflow-hidden rounded-md border border-neutral-300 dark:border-neutral-700"
         >
-          {pageItems.map((item) => (
+          {pageItems.map((item, index) => (
             <li
               className="border-t border-neutral-200 first:border-t-0 dark:border-neutral-800"
               key={item.id}
             >
               <a
-                className="block px-4 py-3 transition hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:hover:bg-neutral-900 dark:focus:bg-neutral-900"
+                className={`block px-4 py-3 transition hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none dark:hover:bg-neutral-900 dark:focus:bg-neutral-900 ${
+                  index === highlightedIndex
+                    ? "bg-neutral-100 dark:bg-neutral-900"
+                    : ""
+                }`}
                 href={item.url}
+                onFocus={() => setHighlightedIndex(index)}
+                onMouseEnter={() => setHighlightedIndex(index)}
                 rel="noreferrer"
                 target="_blank"
               >
                 <span className="block font-medium">{item.title}</span>
                 <span className="mt-1 block text-sm text-neutral-700 dark:text-neutral-300">
+                  {formatJurisdiction(item.jurisdiction)}
+                  {" \u00b7 "}
                   {formatType(item.type)}
                 </span>
               </a>
@@ -281,7 +395,10 @@ export function LegislationSearch() {
           <button
             className="min-h-8 rounded-md border border-neutral-300 px-3 py-1 text-sm transition hover:bg-neutral-100 disabled:cursor-default disabled:text-neutral-500 disabled:hover:bg-transparent dark:border-neutral-700 dark:hover:bg-neutral-900 dark:disabled:text-neutral-600"
             disabled={currentPage === 1}
-            onClick={() => setCurrentPage((page) => page - 1)}
+            onClick={() => {
+              setCurrentPage((page) => page - 1);
+              setHighlightedIndex(-1);
+            }}
             type="button"
           >
             Prev
@@ -301,7 +418,10 @@ export function LegislationSearch() {
                 aria-current={page === currentPage ? "page" : undefined}
                 className="min-h-8 min-w-8 rounded-md border border-neutral-300 px-2 py-1 text-sm transition hover:bg-neutral-100 aria-[current=page]:border-neutral-900 aria-[current=page]:bg-neutral-900 aria-[current=page]:text-white dark:border-neutral-700 dark:hover:bg-neutral-900 dark:aria-[current=page]:border-neutral-100 dark:aria-[current=page]:bg-neutral-100 dark:aria-[current=page]:text-black"
                 key={page}
-                onClick={() => setCurrentPage(page)}
+                onClick={() => {
+                  setCurrentPage(page);
+                  setHighlightedIndex(-1);
+                }}
                 type="button"
               >
                 {page}
@@ -312,7 +432,10 @@ export function LegislationSearch() {
           <button
             className="min-h-8 rounded-md border border-neutral-300 px-3 py-1 text-sm transition hover:bg-neutral-100 disabled:cursor-default disabled:text-neutral-500 disabled:hover:bg-transparent dark:border-neutral-700 dark:hover:bg-neutral-900 dark:disabled:text-neutral-600"
             disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage((page) => page + 1)}
+            onClick={() => {
+              setCurrentPage((page) => page + 1);
+              setHighlightedIndex(-1);
+            }}
             type="button"
           >
             Next
